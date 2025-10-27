@@ -3,12 +3,12 @@ package br.senai.sp.jandira.media_final;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+
+import java.util.Optional;
 
 //extends == é uma (herança)
 public class MediaFinalApp extends Application {
@@ -96,7 +96,94 @@ public class MediaFinalApp extends Application {
         //Mostrar a stage(tela)
         stage.show(); //sempre fica por último
 
-        //Eventos de clique dos botões
-        buttonCalcularMedia.addEventHandler(""); //manipulador de eventos
+        // Eventos de clique dos botões
+        buttonCalcularMedia.setOnAction(click -> {
+            System.out.println("Botão clicado!");
+            String nomeDigitado = textFieldNome.getText();
+            labelAluno.setText("Nome do Aluno: " + nomeDigitado);
+
+            // CALCULAR MÉDIA
+            // OBTER AS NOTAS
+
+            //CRIAR UM VETOR DE NOTAS ou (array)
+            double[] notas = new double[4];
+            String[] notasStr = new String[4];
+
+            notasStr[0]= textFieldNota1.getText();
+            notas[0]= Double.parseDouble(notasStr[0]);
+
+            notasStr[1] = textFieldNota2.getText();
+            notas[1] = Double.parseDouble(notasStr[1]);
+
+            notasStr[2]= textFieldNota3.getText();
+            notas[2] = Double.parseDouble(notasStr[2]);
+
+            notasStr[3]= textFieldNota4.getText();
+            notas[3]= Double.parseDouble(notasStr[3]);
+
+            // USO DE LOOP while (ENQUANTO)
+            // SOMAR NOTAS COM LOOP WHILE
+            double mediaFinal = 0.0;
+            int i = 0;
+            while (i < notasStr.length){
+                mediaFinal = mediaFinal + notas[i];
+                i = i + 1;
+            }
+            mediaFinal = mediaFinal / notas.length;
+
+            String mediaFinalStr = String.format("%.1f",mediaFinal);
+
+            //int volta = 0;
+            //while (volta < 10){
+               // System.out.println("SENAI JANDIRA");
+              //  volta = volta + 1; //criar uma lógica p/ o programa em algum momento sair do looping
+        //}
+
+
+            //double mediaFinal = (notas[0] + notas[1] + notas[3] + notas[3]) /notas.length; //vou dividir pelo tamanho do vetor
+            //String mediaFinalStr = String.format("%.1f", mediaFinal);
+
+            labelMedia.setText("Média final: " + mediaFinalStr);
+                    String resultado;
+
+                    // DEFINIR SITUAÇÃO
+                    if (mediaFinal >= 6){
+                        resultado = "Aprovado";
+                    } else if (mediaFinal < 4){
+                        resultado = "Reprovado";
+                    } else {
+                            resultado = "Recuperação";
+                        }
+
+                    labelSituacao.setText("Situação: " + resultado);
+
+           // double nota1 = Double.parseDouble(textFieldNota1.getText());
+        }); //manipulador de eventos () EventHandler...
+
+        buttonLimpar.setOnAction(click -> {
+            textFieldNome.clear();
+            textFieldNota1.setText("");
+            textFieldNota2.setText("");
+            textFieldNota3.setText("");
+            textFieldNota4.setText("");
+            labelMedia.setText("Média Final: ");
+            labelSituacao.setText("Situação: ");
+            labelAluno.setText("Nome do aluno: ");
+            textFieldNome.requestFocus();
+        }); //função anônima/lambida
+
+        buttonSair.setOnAction(click ->{
+            Alert alerta = new Alert(Alert.AlertType.CONFIRMATION, "Confirma a saída? ", ButtonType.YES, ButtonType.NO);
+            Optional<ButtonType> botaoPressionado = alerta.showAndWait();
+
+            if (botaoPressionado.get () == ButtonType.YES){
+                Alert alert2 = new Alert(Alert.AlertType.INFORMATION, "Até logo!");
+                alert2.showAndWait(); //mostre e espere
+                System.exit(0);
+            }
+            //System.exit(0); //fecha de vez
+        });
+
+
     }
 }
