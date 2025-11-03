@@ -129,7 +129,7 @@ public class MediaFinalApp extends Application {
                 mediaFinal = mediaFinal + notas[i];
                 i = i + 1;
             }
-            mediaFinal = mediaFinal / notas.length;
+            mediaFinal = mediaFinal / notas.length; //length retorna o tamanho do vetor
 
             String mediaFinalStr = String.format("%.1f",mediaFinal);
 
@@ -161,8 +161,8 @@ public class MediaFinalApp extends Application {
         }); //manipulador de eventos () EventHandler...
 
         buttonLimpar.setOnAction(click -> {
-            textFieldNome.clear();
-            textFieldNota1.setText("");
+            textFieldNome.clear(); //tanto faz usar o clear
+            textFieldNota1.setText(""); //ou usar assim
             textFieldNota2.setText("");
             textFieldNota3.setText("");
             textFieldNota4.setText("");
@@ -183,7 +183,6 @@ public class MediaFinalApp extends Application {
             }
             //System.exit(0); //fecha de vez
         });
-
 
     }
 }
