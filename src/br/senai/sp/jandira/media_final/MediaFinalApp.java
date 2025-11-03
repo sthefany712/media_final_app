@@ -126,8 +126,10 @@ public class MediaFinalApp extends Application {
             double mediaFinal = 0.0;
             int i = 0;
             while (i < notasStr.length){
-                mediaFinal = mediaFinal + notas[i];
-                i = i + 1;
+                //mediaFinal = mediaFinal + notas[i];
+                mediaFinal += notas[i]; //é a msm expressão de cima, porém mais curta e muito mais usada. encrementador
+                i = i + 1; //== i++; (++ é igual 1) //encrementador
+
             }
             mediaFinal = mediaFinal / notas.length; //length retorna o tamanho do vetor
 
